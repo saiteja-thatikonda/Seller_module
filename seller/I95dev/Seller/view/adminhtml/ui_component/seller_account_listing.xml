@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+  <argument name="data" xsi:type="array">
+     <item name="js_config" xsi:type="array">
+        <item name="provider" xsi:type="string">seller_account_listing.seller_account_listing_data_source</item>
+        <item name="deps" xsi:type="string">seller_account_listing.seller_account_listing_data_source</item>
+     </item>
+     <item name="spinner" xsi:type="string">seller_account_columns</item>
+     <item name="buttons" xsi:type="array">
+        <item name="add" xsi:type="array">
+           <item name="name" xsi:type="string">add</item>
+           <item name="label" xsi:type="string">add more</item>
+           <item name="class" xsi:type="string">primary</item>
+           <item name="url" xsi:type="string">*/*/new</item>
+        </item>
+     </item>
+  </argument>
+  <dataSource name="seller_account_listing_data_source">
+   <argument name="dataProvider" xsi:type="configurableObject">
+       <argument name="class" xsi:type="string">Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider</argument>
+       <argument name="name" xsi:type="string">seller_account_listing_data_source</argument>
+       <argument name="primaryFieldName" xsi:type="string">id</argument>
+       <argument name="requestFieldName" xsi:type="string">id</argument>
+       <argument name="data" xsi:type="array">
+         <item name="config" xsi:type="array">
+           <item name="update_url" xsi:type="url" path="mui/index/render"/>
+           <item name="storageConfig" xsi:type="array">
+             <item name="indexField" xsi:type="string">id</item>
+           </item>
+         </item>
+       </argument>
+   </argument>
+   <argument name="data" xsi:type="array">
+     <item name="js_config" xsi:type="array">
+        <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+     </item>
+   </argument>
+  </dataSource>
+  <listingToolbar name="listing_top">
+    <bookmark name="bookmarks"/>
+    <columnsControls name="columns_controls"/>
+    <massaction name="listing_massaction">
+      <argument name="data" xsi:type="array">
+        <item name="data" xsi:type="array">
+           <item name="selectProvider" xsi:type="string">seller_account_listing.seller_account_listing.seller_account_columns.ids</item>
+           <item name="displayArea" xsi:type="string">bottom</item>
+           <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+           <item name="indexField" xsi:type="string">id</item>
+        </item>
+      </argument>
+      <action name="delete">
+         <argument name="data" xsi:type="array">
+           <item name="config" xsi:type="array">
+               <item name="type" xsi:type="string">delete</item>
+               <item name="label" xsi:type="string" translate="true">Delete</item>
+               <item name="url" xsi:type="url" path="seller/account/massDelete"/>
+               <item name="confirm" xsi:type="array">
+                  <item name="title" xsi:type="string" translate="true">Delete items</item>
+                  <item name="message" xsi:type="string" translate="true">Are you sure you want to delete selected items?</item>
+               </item>
+           </item>
+         </argument>
+      </action>
+      <action name="edit">
+<argument name="data" xsi:type="array">
+<item name="config" xsi:type="array">
+<item name="type" xsi:type="string">edit</item>
+<item name="label" xsi:type="string" translate="true">Edit</item>
+<item name="callback" xsi:type="array">
+<item name="provider" xsi:type="string">seller_account_listing.seller_account_listing.seller_account_columns_editor</item>
+<item name="target" xsi:type="string">editSelected</item>
+</item>
+</item>
+</argument>
+</action>
+    </massaction>
+    <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+    </filters>
+    <paging name="listing_paging"/>
+  </listingToolbar>
+  <columns name="seller_account_columns">
+    <settings>
+<editorConfig>
+<param name="selectProvider" xsi:type="string">seller_account_listing.seller_account_listing.seller_account_columns.ids</param>
+<param name="enabled" xsi:type="boolean">true</param>
+<param name="indexField" xsi:type="string">id</param>
+<param name="clientConfig" xsi:type="array">
+<item name="saveUrl" xsi:type="url" path="seller/Account/inlineEdit"/>
+<item name="validateBeforeSave" xsi:type="boolean">false</item>
+</param>
+</editorConfig>
+<childDefaults>
+<param name="fieldAction" xsi:type="array">
+<item name="provider" xsi:type="string">seller_account_listing.seller_account_listing.seller_account_columns_editor</item>
+<item name="target" xsi:type="string">startEdit</item>
+<item name="params" xsi:type="array">
+<item name="0" xsi:type="string">${ $.$data.rowIndex }</item>
+<item name="1" xsi:type="boolean">true</item>
+</item>
+</param>
+</childDefaults>
+</settings>
+    <selectionsColumn name="ids">
+       <argument name="data" xsi:type="array">
+           <item name="config" xsi:type="array">
+              <item name="indexField" xsi:type="string">id</item>
+           </item>
+       </argument>
+    </selectionsColumn>
+    <column name="id">
+      <settings>
+         <filter>textRange</filter>
+         <label translate="true">ID</label>
+         <resizeDefaultWidth>25</resizeDefaultWidth>
+      </settings>
+    </column>
+    <column name="name">
+      <settings>
+         <filter>text</filter>
+         <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+         <label translate="true">name</label>
+     </settings>
+    </column>
+    <column name="mobile_number">
+      <settings>
+         <filter>text</filter>
+         <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+         <label translate="true">Mobilenumber</label>
+      </settings>
+    </column>
+    <column name="email">
+      <settings>
+         <filter>text</filter>
+         <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+         <label translate="true">email</label>
+      </settings>
+    </column>
+    <column name="city">
+      <settings>
+         <filter>text</filter>
+         <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+         <label translate="true">city</label>
+      </settings>
+    </column>
+    <column name="state">
+      <settings>
+         <filter>text</filter>
+         <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+         <label translate="true">state</label>
+      </settings>
+    </column>
+    <column name="country">
+      <settings>
+         <filter>text</filter>
+         <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+         <label translate="true">country</label>
+      </settings>
+    </column>
+    <column name="zipcode">
+      <settings>
+         <filter>text</filter>
+         <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+         <label translate="true">zipcode</label>
+      </settings>
+    </column>
+
+    <actionsColumn name="actions" class="I95dev\Seller\Ui\Component\Listing\Column\Actions" sortOrder="200">
+       <argument name="data" xsi:type="array">
+          <item name="config" xsi:type="array">
+              <item name="resizeEnabled" xsi:type="boolean">false</item>
+              <item name="resizeDefaultWidth" xsi:type="string">107</item>
+              <item name="indexField" xsi:type="string">id</item>
+          </item>
+       </argument>
+       <argument name="viewUrl" xsi:type="string">seller/account/create</argument>
+    </actionsColumn>
+  </columns>
+</listing>
+

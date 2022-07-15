@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="seller_form" resource="default" engine="innodb"
+           comment="Seller registration form  to store Seller information">
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Seller ID"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="30"
+                comment="seller Name"/>
+        <column xsi:type="varchar" name="mobile_number" nullable="false" length="30"
+                comment="mobile number"/>
+        <column xsi:type="varchar" name="email" nullable="false" length="30"
+                comment="email Id"/>
+        <column xsi:type="varchar" name="city" nullable="false" length="30"
+                comment="city"/>
+         <column xsi:type="varchar" name="state" nullable="false" length="30"
+                comment="state"/>
+        <column xsi:type="varchar" name="country" nullable="false" length="30"
+                comment="country"/>
+        <column xsi:type="varchar" name="zipcode" nullable="false" length="30"
+                comment="zipcode"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
+</schema>
